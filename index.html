@@ -10,17 +10,31 @@
 	</head>
 	<body>
         <script>
-            function track() {
-                console.log("call segment identify");
+            function identify() {
                 analytics.identify('1634', {
                     name: 'Gopal SA',
                     email: 'gopal.sa@servian.com'
                 });
             }
+
+            function trackAddToCart() {
+                analytics.track('Add To Cart');
+            }
+
+            function trackRemoveFromCart() {
+                analytics.track('Remove From Cart');
+            }
+
+            function trackCheckout() {
+                analytics.track('Checkout');
+            }
         </script>
         <div>
             <p>Segment Tracking</p>
-            <button onclick="track()">Track Gopal</button>
+            <button onclick="identify()">Set User</button>
+            <button onclick="trackAddToCart()">Add Item</button>
+            <button onclick="trackRemoveFromCart()">Delete Item</button>
+            <button onclick="trackCheckout()">Checkout</button>
         </div>
 	</body>
 </html>
