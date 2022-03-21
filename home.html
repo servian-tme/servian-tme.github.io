@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-	<head>
+    <head>
 		<script>
             !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="d7XgtXvfwbM2Ig5b6e9C2XRNVV9H2Eek";;analytics.SNIPPET_VERSION="4.15.3";
             analytics.load("d7XgtXvfwbM2Ig5b6e9C2XRNVV9H2Eek");
@@ -9,18 +9,23 @@
 	</head>
 	<body>
         <script>
-            function identify() {
-                analytics.identify('1634', {
-                    name: 'Gopal SA',
-                    email: 'gopal.sa@servian.com'
-                });
+            function trackAddToCart() {
+                analytics.track('Add To Cart');
+            }
 
-                window.location.href="home.html";
+            function trackRemoveFromCart() {
+                analytics.track('Remove From Cart');
+            }
+
+            function trackCheckout() {
+                analytics.track('Checkout');
             }
         </script>
         <div>
             <p>Segment Tracking</p>
-            <button onclick="identify()">Login</button>
+            <button onclick="trackAddToCart()">Add Item</button>
+            <button onclick="trackRemoveFromCart()">Delete Item</button>
+            <button onclick="trackCheckout()">Checkout</button>
         </div>
 	</body>
 </html>
