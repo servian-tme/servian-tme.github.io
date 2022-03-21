@@ -5,7 +5,6 @@
         body {
             background: white }
         section {
-            background: black;
             color: white;
             border-radius: 1em;
             padding: 1em;
@@ -28,7 +27,8 @@
             function identify() {
                 analytics.identify('1634', {
                     name: 'Gopal SA',
-                    email: 'gopal.sa@servian.com'
+                    email: 'gopal.sa@servian.com',
+                    loggedIn: 'yes'
                 });
 
                 window.location.href="home.html";
