@@ -1,24 +1,41 @@
 <!DOCTYPE html>
 <html>
-    <style>
-        body {
-            background: white }
-        section {
-            color: white;
-            border-radius: 1em;
-            padding: 1em;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-right: -50%;
-            transform: translate(-50%, -50%) }
-      </style>
-
+    
+    <link rel="stylesheet" href="styles.css">
     <head>
 		<script>
             !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="d7XgtXvfwbM2Ig5b6e9C2XRNVV9H2Eek";;analytics.SNIPPET_VERSION="4.15.3";
             analytics.load("d7XgtXvfwbM2Ig5b6e9C2XRNVV9H2Eek");
             }}();
+
+            function log(text) {
+                document.getElementById("text").value += text + "\n";
+            }
+
+            let socket = new WebSocket("wss://javascript.info/article/websocket/demo/hello");
+
+            socket.onopen = function(e) {
+                log("[open] Connection established");
+                socket.send("My name is John");
+            };
+
+            socket.onmessage = function(event) {
+                log(`[message] Data received from server: ${event.data}`);
+            };
+
+            socket.onclose = function(event) {
+                if (event.wasClean) {
+                    log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+                } else {
+                    // e.g. server process killed or network down
+                    // event.code is usually 1006 in this case
+                    log('[close] Connection died');
+                }
+            };
+
+            socket.onerror = function(error) {
+                log(`[error] ${error.message}`);
+            };
         </script>
 	</head>
 	<body>
@@ -32,14 +49,26 @@
             }
 
             function trackCheckout() {
-                analytics.track('Checkout');
+                // analytics.track('Checkout');
+                log()
+            }
+            function logout() {
+                // analytics.track('Logout'); ???
+
+                localStorage.clear();
+                window.location.href="index.html";
             }
         </script>
         <div>
             <section>
-                <button onclick="trackAddToCart()">Add Item</button>
-                <button onclick="trackRemoveFromCart()">Delete Item</button>
-                <button onclick="trackCheckout()">Checkout</button>
+
+                <textarea class="text-area" rows="20" cols="90" disabled id="text"" placeholder="Enter text"></textarea>
+                <br>
+                <button class="btn" onclick="trackAddToCart()">Add Item</button>
+                <button class="btn" onclick="trackRemoveFromCart()">Delete Item</button>
+                <button class="btn" onclick="trackCheckout()">Checkout</button>
+
+                <button class="btn" onclick="logout()">Log out</button>
             </section>
         </div>
 	</body>
